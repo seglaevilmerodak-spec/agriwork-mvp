@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriWork - Marketplace Main-d'œuvre Agricole</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f4f4f4; margin:0; padding:0; }
+h1,h2,h3 { color:#333; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+button { padding:10px 15px; margin:5px; border:none; border-radius:5px; cursor:pointer; }
+.dashboard { display:none; padding:20px; background:white; margin-top:20px; border-radius:10px; }
+.dashboard.active { display:block; }
+.notification { position:fixed; top:20px; right:20px; background:#28a745; color:white; padding:10px 20px; border-radius:5px; transform:translateX(400px); transition:0.3s; }
+.notification.show { transform:translateX(0); }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>AgriWork MVP</h1>
+<button onclick="showDashboard('recruiter')">Recruteur</button>
+<button onclick="showDashboard('worker')">Ouvrier</button>
+
+<div id="recruiter-dashboard" class="dashboard">
+<h2>Dashboard Recruteur</h2>
+<p>Créer et gérer vos missions</p>
+</div>
+
+<div id="worker-dashboard" class="dashboard">
+<h2>Dashboard Ouvrier</h2>
+<p>Consulter et postuler aux missions</p>
+</div>
+</div>
+
+<div id="notif" class="notification"></div>
+
+<script>
+let currentUser = null;
+function showDashboard(userType){
+    document.querySelectorAll('.dashboard').forEach(d=>d.classList.remove('active'));
+    document.getElementById(userType+'-dashboard').classList.add('active');
+    showNotification('Dashboard '+userType+' affiché', 'info');
+}
+
+function showNotification(message,type){
+    const notif=document.getElementById('notif');
+    notif.innerText=message;
+    notif.classList.add('show');
+    setTimeout(()=>notif.classList.remove('show'),3000);
+}
+</script>
+</body>
+</html>
